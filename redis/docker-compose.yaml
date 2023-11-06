@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:bookworm
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+    restart: always
+    networks:
+      - network1
+
+networks:
+  network1:
+    name: docker_network
+    external: true
+
