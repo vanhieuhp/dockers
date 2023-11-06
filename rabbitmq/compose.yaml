@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: rabbitmq:delay-queue
     container_name: rabbitmq
     ports:
       - "15672:15672"
@@ -12,8 +13,9 @@ services:
     volumes:
       - ./data:/var/lib/rabbitmq
     env:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
+      - RABBITMQ_DEFAULT_USER: guest
+      - RABBITMQ_DEFAULT_PASS: guest
+      - RABBITMQ_DEFAULT_VHOST: dev_dorsal
     networks:
       - network1
 
@@ -21,3 +23,6 @@ networks:
   network1:
     name: docker_network
     external: true
+
+
+    container_name: rabbitmq
