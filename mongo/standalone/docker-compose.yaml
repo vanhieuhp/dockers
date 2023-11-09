@@ -1,13 +1,12 @@
 version: '3.8'
 services:
   mongodb:
-    image: mongo
+    image: mongo:7.0.2
     container_name: mongodb
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=
       - MONGO_INITDB_ROOT_PASSWORD=
-    #command: ["--replSet", "rs0", "--bind_ip_all"]
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
     ports:
       - "27017:27017"
