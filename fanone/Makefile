@@ -39,6 +39,13 @@ gateway:
 	
 	@DOCKER_BUILDKIT=1 docker build --no-cache --target gateway -t gateway:1.0 . 
 
+	@docker compose kill gateway
+
+	@docker compose rm gateway -f
+
+	@docker compose up gateway -d || echo ""
+	@docker compose up gateway -d
+
 user:
 	@rm -rf $(USER)
 	@cp -r $(PROJECT_WORKSPACE)/$(USER) $(BASE_WORKSPACE)
@@ -54,3 +61,10 @@ user:
 	@mv $(BASE_WORKSPACE)/$(USER)/build/libs/*.jar $(BASE_WORKSPACE)/jar
 
 	@DOCKER_BUILDKIT=1 docker build --no-cache --target user -t user:1.0 .
+
+	@docker compose kill user
+
+	@docker compose rm user -f
+
+	@docker compose up user -d || echo ""
+	@docker compose up user -d

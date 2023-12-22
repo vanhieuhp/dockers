@@ -3,3 +3,5 @@ node_modules/
 .idea/
 pgadmin/
 jar/
+fandelo-one-gateway/
+fandelo-one-user/
