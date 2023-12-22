@@ -30,6 +30,12 @@ spring:
             - Path=/media/**
           filters:
             - RemoveRequestHeader=Cookie
+        - id: finance
+          uri: http://172.17.0.1:9005
+          predicates:
+            - Path=/finance/**
+          filters:
+            - RemoveRequestHeader=Cookie
         - id: cms
           uri: http://172.17.0.1:6666
           predicates:
