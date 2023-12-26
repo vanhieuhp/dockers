@@ -19,15 +19,15 @@ spring:
           external:
             provider: external
             client-id: fandelo_one
-            client-secret: UUJh8h6HhEZqUa2xE51Oyl1bh7dGBKkk
+            client-secret: D1WwN1LZA0Bc7WunTIOsM86bd9ewk1v1
             scope: openid,offline_access,profile
             authorization-grant-type: authorization_code
         provider:
           external:
-            issuer-uri: http://localhost:8080/realms/fandelo_one
+            issuer-uri: http://172.17.0.1:8080/realms/fandelo_one
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/fandelo_one
+          issuer-uri: http://172.17.0.1:8080/realms/fandelo_one
 
   data:
     redis:
@@ -48,7 +48,7 @@ google:
 
 keycloak:
   realm: fandelo_one
-  server-url: http://localhost:8080
+  server-url: http://172.17.0.1:8080
   admin-client-id: admin-cli
   grant-type: password
   username: admin

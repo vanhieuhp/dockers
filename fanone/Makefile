@@ -1,10 +1,10 @@
 PROJECT_WORKSPACE:= /home/hieujr/data/bluebottle/fandelo
 BASE_WORKSPACE:= /home/hieujr/data/docker/fanone
 COMMON_PATH = $(PROJECT_WORKSPACE)/fandelo-one-common
-COMMON_SECURITY_PATH = $(PROJECT_WORKSPACE)/fandelo-one-common-security
+COMMON_SPRING_PATH = $(PROJECT_WORKSPACE)/fandelo-one-common-spring
 CLIENT = fandelo-one-client
 TALENT = fandelo-one-common
-MEDIA = fandelo-one-common
+MEDIA = fandelo-one-media
 GATEWAY = fandelo-one-gateway
 USER = fandelo-one-user
 
@@ -12,9 +12,9 @@ common:
 	@cd $(COMMON_PATH) && git checkout master -f && git pull origin master 
 	$(COMMON_PATH)/gradlew clean build publishToMavenLocal --project-dir $(COMMON_PATH)
 
-common-security:
-	@cd $(COMMON_SECURITY_PATH) && git checkout master -f && git pull origin master
-	$(COMMON_SECURITY_PATH)/gradlew clean build publishToMavenLocal --project-dir $(COMMON_SECURITY_PATH)
+common-spring:
+	@cd $(COMMON_SPRING_PATH) && git checkout master -f && git pull origin master
+	$(COMMON_SPRING_PATH)/gradlew clean build publishToMavenLocal --project-dir $(COMMON_SPRING_PATH)
 	
 client:
 	@cp -r $(PROJECT_WORKSPACE)/$(CLIENT) $(BASE_WORKSPACE)
@@ -32,6 +32,7 @@ gateway:
 	@cd $(BASE_WORKSPACE)/$(GATEWAY) && git checkout -f master && git pull origin master
 	
 	@cp properties/gateway-application-dev.yaml $(BASE_WORKSPACE)/$(GATEWAY)/src/main/resources/application-dev.yaml
+	@cp properties/gateway-policy-enforcer-dev.json $(BASE_WORKSPACE)/$(GATEWAY)/src/main/resources/policy-enforcer-dev.json
 	
 	$(BASE_WORKSPACE)/$(GATEWAY)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(GATEWAY) --stacktrace --info
 	
@@ -53,8 +54,8 @@ user:
 	@cd $(BASE_WORKSPACE)/$(USER) && git checkout -f master && git pull origin master
 
 	@cp properties/user_dev_mysql.properties $(BASE_WORKSPACE)/$(USER)/src/main/conf/dev/dev_mysql.properties
-
 	@cp properties/user-application-dev.yaml $(BASE_WORKSPACE)/$(USER)/src/main/resources/application-dev.yaml
+	@cp properties/user_dev_redisson.yaml $(BASE_WORKSPACE)/$(USER)/src/main/conf/dev/dev_redisson.yaml
 	
 	$(BASE_WORKSPACE)/$(USER)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(USER) --stacktrace --info
 	
@@ -66,5 +67,4 @@ user:
 
 	@docker compose rm user -f
 
-	@docker compose up user -d || echo ""
 	@docker compose up user -d
