@@ -1,0 +1,15 @@
+{
+  "realm": "fandelo_one",
+  "auth-server-url": "http://localhost:8080",
+  "resource": "fandelo_one",
+  "credentials": {
+    "secret": "NDkqDgHZQQuy0lAXNpCyC1SY39rmPSri"
+  },
+  "http-method-as-scope": false,
+  "paths": [
+    {
+      "path": "/user/v1/auth/login",
+      "enforcement-mode": "DISABLED"
+    }
+  ]
+}

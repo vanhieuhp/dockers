@@ -9,8 +9,9 @@ services:
     restart: on-failure
     environment:
       BASE_DIR: "."
+      SPRING_PROFILES_ACTIVE: "dev"
     networks:
-      - network1
+      hostnet: {}
 
   user:
     image: user:1.0
@@ -20,10 +21,11 @@ services:
     restart: on-failure
     environment:
       BASE_DIR: "."
+      SPRING_PROFILES_ACTIVE: "dev"
     networks:
-      - network1
+      hostnet: {}
 
 networks:
-  network1:
+  hostnet:
     external: true
     name: host
