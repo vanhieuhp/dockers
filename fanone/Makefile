@@ -7,6 +7,7 @@ TALENT = fandelo-one-common
 MEDIA = fandelo-one-media
 GATEWAY = fandelo-one-gateway
 USER = fandelo-one-user
+MAIL = fandelo-one-mail
 BRANCH = develop
 
 common:
@@ -70,3 +71,22 @@ user:
 
 	@docker compose up user -d
 	
+mail:
+	@rm -rf $(MAIL)
+	@cp -r $(PROJECT_WORKSPACE)/$(MAIL) $(BASE_WORKSPACE)
+
+	@cd $(BASE_WORKSPACE)/$(MAIL) && git fetch && git checkout -f $(BRANCH) && git pull origin $(BRANCH)
+	
+	@cp properties/mail-application-dev.properties $(BASE_WORKSPACE)/$(MAIL)/src/main/resources/application-dev.yaml
+
+	$(BASE_WORKSPACE)/$(MAIL)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(MAIL) --stacktrace --info
+	
+	@mv $(BASE_WORKSPACE)/$(MAIL)/build/libs/*.jar $(BASE_WORKSPACE)/jar
+
+	@DOCKER_BUILDKIT=1 docker build --no-cache --target mail -t mail:1.0 .
+
+	@docker compose kill mail
+
+	@docker compose rm mail -f
+
+	@docker compose up mail -d
