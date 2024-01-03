@@ -19,7 +19,7 @@ spring:
           external:
             provider: external
             client-id: fandelo_one
-            client-secret: D1WwN1LZA0Bc7WunTIOsM86bd9ewk1v1
+            client-secret: NDkqDgHZQQuy0lAXNpCyC1SY39rmPSri
             scope: openid,offline_access,profile
             authorization-grant-type: authorization_code
         provider:
@@ -31,13 +31,15 @@ spring:
 
   data:
     redis:
-      host: redis
+      host: localhost
       password:
       port: 6379
 
   threads:
     virtual:
       enabled: true
+#  jpa:
+#    show-sql: true
 
 google:
   recaptcha:
@@ -52,4 +54,23 @@ keycloak:
   admin-client-id: admin-cli
   grant-type: password
   username: admin
-  password: admin
+  password: Pa55w0rd
+
+
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        SQL: DEBUG
+#        type: TRACE
+
+#logback
+logback:
+  hibernate:
+    level: DEBUG
+  sql:
+    level: ERROR
+  root:
+    level: DEBUG
+  appender:
+    ref: STDOUT

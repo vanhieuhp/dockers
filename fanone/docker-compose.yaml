@@ -8,10 +8,10 @@ services:
       - "9000:9000"
     restart: on-failure
     environment:
-      BASE_DIR: "."
-      SPRING_PROFILES_ACTIVE: "dev"
+      BASE_DIR: .
+      SPRING_PROFILES_ACTIVE: dev
     networks:
-      hostnet: {}
+      - hostnet
 
   user:
     image: user:1.0
@@ -20,12 +20,13 @@ services:
       - "9001:9001"
     restart: on-failure
     environment:
-      BASE_DIR: "."
-      SPRING_PROFILES_ACTIVE: "dev"
+      BASE_DIR: .
+      SPRING_PROFILES_ACTIVE: dev
+      AWS_REGION: ap-southeast-2
     networks:
-      hostnet: {}
+      - hostnet
 
 networks:
   hostnet:
     external: true
-    name: host
+    name: docker_network
