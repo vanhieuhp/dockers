@@ -3,4 +3,4 @@ redis:
     properties:
       singleServerConfig:
         clientName: dev-redis-client
-        address: "${REDIS_URL}"
+        address: "redis://redis:6379"

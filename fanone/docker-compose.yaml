@@ -7,11 +7,10 @@ services:
     ports:
       - "9000:9000"
     restart: on-failure
-    environment:
-      BASE_DIR: .
-      SPRING_PROFILES_ACTIVE: dev
+    env_file:
+      - .env
     networks:
-      - hostnet
+      - network1
 
   user:
     image: user:1.0
@@ -19,27 +18,12 @@ services:
     ports:
       - "9001:9001"
     restart: on-failure
-    environment:
-      BASE_DIR: .
-      SPRING_PROFILES_ACTIVE: dev
-      AWS_REGION: ap-southeast-2
+    env_file:
+      - .env
     networks:
-      - hostnet
-
-  mail:
-    image: mail:1.0
-    container_name: mail
-    ports:
-      - "9007:9007"
-    restart: on-failure
-    environment:
-      BASE_DIR: .
-      SPRING_PROFILES_ACTIVE: dev
-      AWS_REGION: ap-southeast-2
-    networks:
-      - hostnet
+      - network1
 
 networks:
-  hostnet:
+  network1:
     external: true
     name: docker_network
