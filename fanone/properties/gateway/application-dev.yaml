@@ -1,10 +1,10 @@
 service:
-  user: http://172.17.0.1:9001
-  talent: http://172.17.0.1:9002
-  client: http://172.17.0.1:9003
-  media: http://172.17.0.1:9004
-  finance: http://172.17.0.1:9005
-  cms: http://172.17.0.1:6666
+  user: ${USER_SERVICE_URL}
+  talent: ${TALENT_SERVICE_URL}
+  client: ${CLIENT_SERVICE_URL}
+  media: ${MEDIA_SERVICE_URL}
+  finance: ${FINANCE_SERVICE_URL}
+  cms: ${CMS_SERVICE_URL}
 
 logging.level:
   org.springframework.cloud.gateway: TRACE

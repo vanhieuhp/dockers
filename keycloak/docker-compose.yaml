@@ -25,10 +25,8 @@ services:
       - "traefik.http.middlewares.compresstraefik.compress=true"
       - "traefik.docker.network=traefik-network"
     restart: unless-stopped
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      KEYCLOAK_PROFILE_FEATURE_UPLOAD_SCRIPTS: enabled
+    env_file:
+      - .env
     command: "start-dev --features=preview"
     volumes:
       - ./data:/opt/keycloak/data/

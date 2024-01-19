@@ -1,9 +1,9 @@
 policy-enforcer:
-  realm: ${KEYCLOAK_REALM}
-  auth-server-url: ${KEYCLOAK_SERVICE_URL}
-  resource: ${KEYCLOAK_RESOURCE}
+  realm: fandelo_one
+  auth-server-url: http://172.17.0.1:8080
+  resource: fandelo_one
   credentials:
-    secret: ${KEYCLOAK_SECRET}
+    secret: NDkqDgHZQQuy0lAXNpCyC1SY39rmPSri
   http-method-as-scope: false
   paths:
     - path: /user/v1/auth/login
@@ -23,4 +23,6 @@ policy-enforcer:
     - path: /talent/public/*
       enforcement-mode: DISABLED
     - path: /finance/v1/cron/*
+      enforcement-mode: DISABLED
+    - path: /cms/v1/favorites/cronjob/content/latest
       enforcement-mode: DISABLED

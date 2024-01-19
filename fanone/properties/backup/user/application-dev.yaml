@@ -1,5 +1,5 @@
 server:
-  port: ${port:9001}
+  port: 9001
   servlet:
     context-path: /user
 
@@ -19,32 +19,27 @@ spring:
           external:
             provider: external
             client-id: fandelo_one
-            client-secret: ${KEYCLOAK_SECRET}
+            client-secret: NDkqDgHZQQuy0lAXNpCyC1SY39rmPSri
             scope: openid,offline_access,profile
             authorization-grant-type: authorization_code
         provider:
           external:
-            issuer-uri: ${KEYCLOAK_ISSUER_URI}
+            issuer-uri: http://172.17.0.1:8080/realms/fandelo_one
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URI}
+          issuer-uri: http://172.17.0.1:8080/realms/fandelo_one
 
   data:
     redis:
-      host: ${REDIS_URL}
+      host: localhost
       password:
       port: 6379
 
   threads:
     virtual:
       enabled: true
-  jpa:
-    show-sql: true
-
-  cloud:
-    aws:
-      region:
-        static: ap-southeast-2
+#  jpa:
+#    show-sql: true
 
 google:
   recaptcha:
@@ -54,20 +49,20 @@ google:
       threshold: 0.5
 
 keycloak:
-  realm: ${KEYCLOAK_REALM}
-  server-url: ${KEYCLOAK_SERVICE_URL}
+  realm: fandelo_one
+  server-url: http://172.17.0.1:8080
   admin-client-id: admin-cli
   grant-type: password
-  username: ${KEYCLOAK_ADMIN}
-  password: ${KEYCLOAK_ADMIN_PASSWORD}
+  username: admin
+  password: Pa55w0rd
 
 
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type: TRACE
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        SQL: DEBUG
+#        type: TRACE
 
 #logback
 logback:
