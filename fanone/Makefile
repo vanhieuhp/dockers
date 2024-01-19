@@ -39,7 +39,7 @@ gateway:
 
 	@docker compose up gateway -d || echo ""
 	@docker compose up gateway -d
-
+	@rm -rf $(BASE_WORKSPACE)/$(GATEWAY)
 user:
 	@rm -rf $(USER)
 	@cp -r $(PROJECT_WORKSPACE)/$(USER) $(BASE_WORKSPACE)
@@ -61,7 +61,7 @@ user:
 	@docker compose rm user -f
 
 	@docker compose up user -d
-	
+	@rm -rf $(BASE_WORKSPACE)/$(USER)
 mail:
 	@rm -rf $(MAIL)
 	@cp -r $(PROJECT_WORKSPACE)/$(MAIL) $(BASE_WORKSPACE)
