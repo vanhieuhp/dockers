@@ -17,15 +17,6 @@ common:
 common-spring:
 	@cd $(COMMON_SPRING_PATH) && git fetch && git checkout $(BRANCH) -f && git pull origin $(BRANCH)
 	$(COMMON_SPRING_PATH)/gradlew clean build publishToMavenLocal --project-dir $(COMMON_SPRING_PATH)
-	
-client:
-	@cp -r $(PROJECT_WORKSPACE)/$(CLIENT) $(BASE_WORKSPACE)
-
-	@cp properties/client_dev_mysql.properties $(BASE_WORKSPACE)/$(CLIENT)/src/main/conf/dev/dev_mysql.properties
-	
-	$(BASE_WORKSPACE)/$(CLIENT)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(CLIENT) --stacktrace --info
-	
-	@mv $(BASE_WORKSPACE)/$(CLIENT)/build/libs/*.jar $(BASE_WORKSPACE)/jar
 
 gateway:
 	@rm -rf $(GATEWAY)
@@ -33,8 +24,8 @@ gateway:
 
 	@cd $(BASE_WORKSPACE)/$(GATEWAY) && git fetch && git checkout -f $(BRANCH) && git pull origin $(BRANCH)
 	
-	@cp properties/gateway-application-dev.yaml $(BASE_WORKSPACE)/$(GATEWAY)/src/main/resources/application-dev.yaml
-	@cp properties/gateway-policy-enforcer-dev.json $(BASE_WORKSPACE)/$(GATEWAY)/src/main/resources/policy-enforcer-dev.json
+	@cp properties/gateway/application-dev.yaml $(BASE_WORKSPACE)/$(GATEWAY)/src/main/resources/application-dev.yaml
+	@cp properties/gateway/policy-enforcer-dev.yaml $(BASE_WORKSPACE)/$(GATEWAY)/src/main/resources/policy-enforcer-dev.yaml
 	
 	$(BASE_WORKSPACE)/$(GATEWAY)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(GATEWAY) --stacktrace --info
 	
@@ -55,9 +46,9 @@ user:
 
 	@cd $(BASE_WORKSPACE)/$(USER) && git fetch && git checkout -f $(BRANCH) && git pull origin $(BRANCH)
 
-	@cp properties/user_dev_mysql.properties $(BASE_WORKSPACE)/$(USER)/src/main/conf/dev/dev_mysql.properties
-	@cp properties/user-application-dev.yaml $(BASE_WORKSPACE)/$(USER)/src/main/resources/application-dev.yaml
-	@cp properties/user_dev_redisson.yaml $(BASE_WORKSPACE)/$(USER)/src/main/conf/dev/dev_redisson.yaml
+	@cp properties/user/dev_mysql.properties $(BASE_WORKSPACE)/$(USER)/src/main/conf/dev/dev_mysql.properties
+	@cp properties/user/application-dev.yaml $(BASE_WORKSPACE)/$(USER)/src/main/resources/application-dev.yaml
+	@cp properties/user/dev_redisson.yaml $(BASE_WORKSPACE)/$(USER)/src/main/conf/dev/dev_redisson.yaml
 	
 	$(BASE_WORKSPACE)/$(USER)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(USER) --stacktrace --info
 	
