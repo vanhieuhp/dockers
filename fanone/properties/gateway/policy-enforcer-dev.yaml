@@ -1,0 +1,28 @@
+policy-enforcer:
+  realm: fandelo_one
+  auth-server-url: http://172.17.0.1:8080
+  resource: fandelo_one
+  credentials:
+    secret: NDkqDgHZQQuy0lAXNpCyC1SY39rmPSri
+  http-method-as-scope: false
+  paths:
+    - path: /user/v1/auth/login
+      enforcement-mode: DISABLED
+    - path: /client/v1/hellosign/callback
+      enforcement-mode: DISABLED
+    - path: /client/hellosign-contract/partner
+      enforcement-mode: DISABLED
+    - path: /client/v1/hellosign/signers/partner/sign-url
+      enforcement-mode: DISABLED
+    - path: /client/v1/hellosign/signers/agency/sign-url
+      enforcement-mode: DISABLED
+    - path: /client/v1/hellosign/signers/partner/signature-status
+      enforcement-mode: DISABLED
+    - path: /client/v1/hellosign/signers/agency/signature-status
+      enforcement-mode: DISABLED
+    - path: /talent/public/*
+      enforcement-mode: DISABLED
+    - path: /finance/v1/cron/*
+      enforcement-mode: DISABLED
+    - path: /cms/v1/favorites/cronjob/content/latest
+      enforcement-mode: DISABLED
