@@ -11,14 +11,14 @@ services:
     networks:
       - network1
 
-  redisinsight:
-    image: redislabs/redisinsight:1.14.0
-    container_name: redis-insight
-    restart: always
-    ports:
-      - "8001:8001"
-    networks:
-      - network1
+  # redisinsight:
+  #   image: redislabs/redisinsight:1.14.0
+  #   container_name: redis-insight
+  #   restart: always
+  #   ports:
+  #     - "8001:8001"
+  #   networks:
+  #     - network1
 
 networks:
   network1:
