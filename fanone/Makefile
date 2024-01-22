@@ -9,6 +9,7 @@ GATEWAY = fandelo-one-gateway
 USER = fandelo-one-user
 MAIL = fandelo-one-mail
 BRANCH = develop
+AWS_URI = 186579991713.dkr.ecr.ap-southeast-1.amazonaws.com
 
 common:
 	@cd $(COMMON_PATH) && git fetch && git checkout $(BRANCH) -f && git pull origin $(BRANCH) 
@@ -18,8 +19,7 @@ common-spring:
 	@cd $(COMMON_SPRING_PATH) && git fetch && git checkout $(BRANCH) -f && git pull origin $(BRANCH)
 	$(COMMON_SPRING_PATH)/gradlew clean build publishToMavenLocal --project-dir $(COMMON_SPRING_PATH)
 
-gateway:
-	@rm -rf $(GATEWAY)
+gateway-build:
 	@cp -r $(PROJECT_WORKSPACE)/$(GATEWAY) $(BASE_WORKSPACE)
 
 	@cd $(BASE_WORKSPACE)/$(GATEWAY) && git fetch && git checkout -f $(BRANCH) && git pull origin $(BRANCH)
@@ -31,17 +31,24 @@ gateway:
 	
 	@mv $(BASE_WORKSPACE)/$(GATEWAY)/build/libs/*.jar $(BASE_WORKSPACE)/jar
 	
-	@DOCKER_BUILDKIT=1 docker build --no-cache --target gateway -t gateway:1.0 . 
+	DOCKER_BUILDKIT=1 docker build --no-cache --target gateway -t gateway:1.0 .
+	rm -rf $(BASE_WORKSPACE)/$(GATEWAY)
 
+
+gateway-docker: gateway-build
 	@docker compose kill gateway
 
 	@docker compose rm gateway -f
 
 	@docker compose up gateway -d || echo ""
 	@docker compose up gateway -d
-	@rm -rf $(BASE_WORKSPACE)/$(GATEWAY)
-user:
-	@rm -rf $(USER)
+
+gateway-aws: gateway-build
+	aws ecr get-login-password --region ap-southeast-1 --profile vanhieuit10-aws | docker login --username AWS --password-stdin $(AWS_URI)
+	docker tag gateway:1.0 $(AWS_URI)/fanone/gateway:1.0
+	docker push $(AWS_URI)/fanone/gateway:1.0
+
+user-build:
 	@cp -r $(PROJECT_WORKSPACE)/$(USER) $(BASE_WORKSPACE)
 
 	@cd $(BASE_WORKSPACE)/$(USER) && git fetch && git checkout -f $(BRANCH) && git pull origin $(BRANCH)
@@ -55,29 +62,16 @@ user:
 	@mv $(BASE_WORKSPACE)/$(USER)/build/libs/*.jar $(BASE_WORKSPACE)/jar
 
 	@DOCKER_BUILDKIT=1 docker build --no-cache --target user -t user:1.0 .
+	@rm -rf $(BASE_WORKSPACE)/$(USER)
 
+user-docker: user-build
 	@docker compose kill user
 
 	@docker compose rm user -f
 
 	@docker compose up user -d
-	@rm -rf $(BASE_WORKSPACE)/$(USER)
-mail:
-	@rm -rf $(MAIL)
-	@cp -r $(PROJECT_WORKSPACE)/$(MAIL) $(BASE_WORKSPACE)
 
-	@cd $(BASE_WORKSPACE)/$(MAIL) && git fetch && git checkout -f $(BRANCH) && git pull origin $(BRANCH)
-	
-	@cp properties/mail-application-dev.properties $(BASE_WORKSPACE)/$(MAIL)/src/main/resources/application-dev.yaml
-
-	$(BASE_WORKSPACE)/$(MAIL)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(MAIL) --stacktrace --info
-	
-	@mv $(BASE_WORKSPACE)/$(MAIL)/build/libs/*.jar $(BASE_WORKSPACE)/jar
-
-	@DOCKER_BUILDKIT=1 docker build --no-cache --target mail -t mail:1.0 .
-
-	@docker compose kill mail
-
-	@docker compose rm mail -f
-
-	@docker compose up mail -d
+user-aws: user-build
+	aws ecr get-login-password --region ap-southeast-1 --profile vanhieuit10-aws | docker login --username AWS --password-stdin $(AWS_URI)
+	docker tag user:1.0 $(AWS_URI)/fanone/user:1.0
+	docker push $(AWS_URI)/fanone/user:1.0
