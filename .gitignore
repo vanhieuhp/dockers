@@ -6,3 +6,4 @@ jar/
 fandelo-one-gateway/
 fandelo-one-user/
 .env
+wp_data/
