@@ -1,5 +1,5 @@
-PROJECT_WORKSPACE:= /home/hieujr/data/bluebottle/fandelo
-BASE_WORKSPACE:= /home/hieujr/data/docker/fanone
+PROJECT_WORKSPACE:= /home/vanhieu/data/bluebottle/fandelo
+BASE_WORKSPACE:= /home/vanhieu/data/docker/fanone
 COMMON_PATH = $(PROJECT_WORKSPACE)/fandelo-one-common
 COMMON_SPRING_PATH = $(PROJECT_WORKSPACE)/fandelo-one-common-spring
 CLIENT = fandelo-one-client
@@ -45,8 +45,8 @@ gateway-docker: gateway-build
 
 gateway-aws: gateway-build
 	aws ecr get-login-password --region ap-southeast-1 --profile vanhieuit10-aws | docker login --username AWS --password-stdin $(AWS_URI)
-	docker tag gateway:1.0 $(AWS_URI)/fanone/gateway:1.0
-	docker push $(AWS_URI)/fanone/gateway:1.0
+	docker tag gateway:1.0 $(AWS_URI)/appone/gateway:1.0
+	docker push $(AWS_URI)/appone/gateway:1.0
 
 user-build:
 	@cp -r $(PROJECT_WORKSPACE)/$(USER) $(BASE_WORKSPACE)
@@ -73,5 +73,34 @@ user-docker: user-build
 
 user-aws: user-build
 	aws ecr get-login-password --region ap-southeast-1 --profile vanhieuit10-aws | docker login --username AWS --password-stdin $(AWS_URI)
-	docker tag user:1.0 $(AWS_URI)/fanone/user:1.0
-	docker push $(AWS_URI)/fanone/user:1.0
+	docker tag user:1.0 $(AWS_URI)/appone/user:1.0
+	docker push $(AWS_URI)/appone/user:1.0
+
+
+mail-build:
+	
+	@rm -rf $(BASE_WORKSPACE)/$(MAIL) || echo "Mail build"
+	@cp -r $(PROJECT_WORKSPACE)/$(MAIL) $(BASE_WORKSPACE)
+
+	@cd $(BASE_WORKSPACE)/$(MAIL) && git fetch && git checkout -f $(BRANCH) && git pull origin $(BRANCH)
+
+	@cp $(BASE_WORKSPACE)/properties/mail/application-dev.properties $(BASE_WORKSPACE)/$(MAIL)/src/main/resources/application-dev.properties
+	
+	$(BASE_WORKSPACE)/$(MAIL)/gradlew clean bootJar --project-dir $(BASE_WORKSPACE)/$(MAIL) --stacktrace --info
+	
+	@mv $(BASE_WORKSPACE)/$(MAIL)/build/libs/*.jar $(BASE_WORKSPACE)/jar
+
+	@DOCKER_BUILDKIT=1 docker build --no-cache --target mail -t mail:1.0 .
+	@rm -rf $(BASE_WORKSPACE)/$(MAIL)
+
+mail-docker: user-build
+	@docker compose kill mail
+
+	@docker compose rm mail -f
+
+	@docker compose up mail -d
+
+mail-aws:
+	aws ecr get-login-password --region ap-southeast-1 --profile vanhieuit10-aws | docker login --username AWS --password-stdin $(AWS_URI)
+	docker tag mail:1.0 $(AWS_URI)/appone/mail:1.0
+	docker push $(AWS_URI)/appone/mail:1.0
