@@ -2,12 +2,11 @@ data/
 node_modules/
 .idea/
 pgadmin/
+jar/
 fandelo-one-gateway/
 fandelo-one-user/
 .env
 wp_data/
-jar/
-
 prism-fe/workspace
 prism-fe/workspacebk
 HELP.md
@@ -48,3 +47,4 @@ out/
 ### VS Code ###
 .vscode/
 data_bk
+jar/
