@@ -7,9 +7,15 @@ services:
       - "6379:6379"
     volumes:
       - ./data:/data
-    restart: always
+    restart: on-failure
     networks:
       - network1
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      timeout: 10s
+      retries: 3
+      interval: 15s
+      start_period: 30s
 
   # redisinsight:
   #   image: redislabs/redisinsight:1.14.0

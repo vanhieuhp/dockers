@@ -11,7 +11,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      start_period: 90s
+      start_period: 30s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.keycloak.rule=Host(`${KEYCLOAK_HOSTNAME}`)"

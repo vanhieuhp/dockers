@@ -12,10 +12,14 @@ services:
       - "5672:5672"
     volumes:
       - ./data:/var/lib/rabbitmq
-    env:
-      - RABBITMQ_DEFAULT_USER: guest
-      - RABBITMQ_DEFAULT_PASS: guest
-      - RABBITMQ_DEFAULT_VHOST: dev_dorsal
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5672"]
+      timeout: 10s
+      retries: 3
+      interval: 15s
+      start_period: 30s
     networks:
       - network1
 
@@ -23,6 +27,3 @@ networks:
   network1:
     name: docker_network
     external: true
-
-
-    container_name: rabbitmq
