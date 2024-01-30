@@ -1,13 +1,9 @@
-FROM rabbitmq:3.8.5-management
+# FROM rabbitmq:3.8.5-management
 
-RUN apt-get update
+FROM rabbitmq:3.12.12-management-alpine
 
-RUN apt-get install -y curl
+RUN apk update && apk add curl
 
-RUN curl -L https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez > $RABBITMQ_HOME/plugins/rabbitmq_delayed_message_exchange-3.8.0.ez
+COPY rabbitmq_delayed_message_exchange-3.12.0.ez .$RABBITMQ_HOME/plugins/rabbitmq_delayed_message_exchange-3.12.0.ez
 
-RUN chown rabbitmq:rabbitmq $RABBITMQ_HOME/plugins/rabbitmq_delayed_message_exchange-3.8.0.ez
-
-RUN rabbitmq-plugins enable --offline rabbitmq_delayed_message_exchange
-
-RUN rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange
+RUN rabbitmq-plugins enable rabbitmq_top rabbitmq_shovel rabbitmq_consistent_hash_exchange rabbitmq_delayed_message_exchange rabbitmq_management rabbitmq_web_dispatch rabbitmq_stomp rabbitmq_web_stomp rabbitmq_prometheus

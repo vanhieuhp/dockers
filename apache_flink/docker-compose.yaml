@@ -1,0 +1,5 @@
+version: "3.8"
+
+services:
+  flink: 
+    image: scala_2.12-java17

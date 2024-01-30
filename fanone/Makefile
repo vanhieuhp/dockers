@@ -1,5 +1,5 @@
-PROJECT_WORKSPACE:= /home/vanhieu/data/bluebottle/fandelo
-BASE_WORKSPACE:= /home/vanhieu/data/docker/fanone
+PROJECT_WORKSPACE:= ~/data/bluebottle/fandelo
+BASE_WORKSPACE:= ~/data/docker/fanone
 COMMON_PATH = $(PROJECT_WORKSPACE)/fandelo-one-common
 COMMON_SPRING_PATH = $(PROJECT_WORKSPACE)/fandelo-one-common-spring
 CLIENT = fandelo-one-client
@@ -8,7 +8,7 @@ MEDIA = fandelo-one-media
 GATEWAY = fandelo-one-gateway
 USER = fandelo-one-user
 MAIL = fandelo-one-mail
-BRANCH = develop
+BRANCH = master
 AWS_URI = 186579991713.dkr.ecr.ap-southeast-1.amazonaws.com
 
 common:
