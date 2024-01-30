@@ -7,3 +7,5 @@ fandelo-one-user/
 .env
 wp_data/
 jar/
+
+prism-frontend/portal/*
