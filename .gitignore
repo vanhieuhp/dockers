@@ -8,4 +8,5 @@ fandelo-one-user/
 wp_data/
 jar/
 
-prism-frontend/portal/*
+prism-fe/workspace
+prism-fe/workspacebk
