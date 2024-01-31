@@ -16,4 +16,5 @@ https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 ```
 rabbitmqctl status
 docker compose up -d amqp://guest:guest@localhost/vh_host
+docker cp apache:/usr/local/apache2/conf/httpd.conf .
 ```
