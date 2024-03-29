@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <video id="my-video" class="video-js vjs-big-play-centered vjs-theme-sea" controls preload="auto" fluid="true"
+        poster="https://www.tutorialspoint.com/videos/sample.png" data-setup='{}'>
+        <source
+            src="https://test.cdn.prism.horse/media/fec9d32a-95c5-4871-838c-6c0e8deab3b2/430189bf09c5425f903ca22589342997.m3u8"
+            type="application/x-mpegURL">
+    </video>
+</body>
+
+</html>
+
+<!-- ready but not good css -->
+
+<script type="text/javascript" src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/videojs-contribhls/dist/videojs-contrib-hls.js"></script>
+<videogular vg-update-state="onUpdateState($state)" vg-player-ready="onPlayerReady($API)" vg-theme="config.theme.url"
+    vg-responsive="true">
+    <vg-buffering></vg-buffering>
+    <vg-controls>
+        <vg-play-pause-button></vg-play-pause-button>
+        <vg-volume>
+            <vg-mute-button></vg-mute-button>
+            <vg-volume-bar></vg-volume-bar>
+        </vg-volume>
+        <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+        <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        </vg-scrub-bar>
+        <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+        <vg-fullscreen-button></vg-fullscreen-button>
+    </vg-controls>
+
+    <vg-overlay-play></vg-overlay-play>
+    <vg-poster vg-url='config.plugins.poster'></vg-poster>
+    <video id="my-video" class="video-js vjs-big-play-centered vjs-theme-sea" controls preload="auto" fluid="true"
+        data-setup='{}'>
+        <source
+            src="https://test.cdn.prism.horse/media/fec9d32a-95c5-4871-838c-6c0e8deab3b2/430189bf09c5425f903ca22589342997.m3u8"
+            type="application/x-mpegURL">
+    </video>
+</videogular>
+<script>
+    var player = videojs('my-video');
+</script>
+
+<!-- Origin -->
+<videogular vg-update-state="onUpdateState($state)" vg-player-ready="onPlayerReady($API)" vg-theme="config.theme.url"
+    vg-responsive="true">
+    <vg-media vg-src="scanImage.source"></vg-media>
+
+    <vg-buffering></vg-buffering>
+
+    <vg-controls>
+        <vg-play-pause-button></vg-play-pause-button>
+        <vg-volume>
+            <vg-mute-button></vg-mute-button>
+            <vg-volume-bar></vg-volume-bar>
+        </vg-volume>
+        <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+        <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        </vg-scrub-bar>
+        <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+        <vg-fullscreen-button></vg-fullscreen-button>
+    </vg-controls>
+
+    <vg-overlay-play></vg-overlay-play>
+    <vg-poster vg-url='config.plugins.poster'></vg-poster>
+</videogular>
