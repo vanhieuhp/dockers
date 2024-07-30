@@ -8,8 +8,8 @@ compress:
 	rm -rf $(PROJECT_WORKSPACE)/portal | echo ""
 	rm -rf $(DOCKER_WORKSPACE)/workspace/portal | echo ""
 	
-	cd $(PROJECT_WORKSPACE) && git reset --h
-# cd $(PROJECT_WORKSPACE) && git reset --h && git checkout test 
+	# cd $(PROJECT_WORKSPACE) && git reset --h
+	cd $(PROJECT_WORKSPACE) && git reset --h && git checkout develop  && git pull
 	
 	sed -i -e 's|var PRISM_API_URL.*;|var PRISM_API_URL = "$(BACKEND_API)";|g' $(PROJECT_WORKSPACE)/src/app/api/api.js
 	sed -i -e 's|var PRISM_STOMP_URL.*;|var PRISM_STOMP_URL = "$(WS_API)";|g' $(PROJECT_WORKSPACE)/src/app/api/api.js
