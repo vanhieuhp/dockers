@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mongo1:
     container_name: mongo1
@@ -38,8 +36,6 @@ services:
       - 27019:27017
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
-    networks:
-      - network1
 
 networks:
   network1:
