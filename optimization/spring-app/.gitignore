@@ -1,15 +1,3 @@
-data/
-node_modules/
-.idea/
-pgadmin/
-fandelo-one-gateway/
-fandelo-one-user/
-.env
-wp_data/
-jar/
-
-prism-fe/workspace
-prism-fe/workspacebk
 HELP.md
 .gradle
 build/
@@ -47,4 +35,3 @@ out/
 
 ### VS Code ###
 .vscode/
-data_bk

@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
+    <style type="text/css" media="screen">
+        body {
+            font-size: 12px;
+            font-family: 'Roboto', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        }
+
+        p {
+            line-height: 1.4;
+        }
+
+        thead,
+        tfoot {
+            display: table-row-group;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        #logo-left {
+            padding: 0px 20px 20px 20px;
+            float: left;
+
+        }
+
+        #logo-right {
+            float: right;
+        }
+
+        .stable-info {
+            width: 40%;
+            float: left;
+            text-align: left;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .col-100 {
+            width: 100%
+        }
+
+        .col-15 {
+            width: 15%
+        }
+
+        .col-25 {
+            width: 25%
+        }
+
+        .col-20 {
+            width: 20%
+        }
+
+        .col-27 {
+            width: 27%
+        }
+
+        .col-30 {
+            width: 30%
+        }
+
+        .col-35 {
+            width: 35%
+        }
+
+        .txt-center {
+            text-align: center;
+        }
+
+        .txt-left {
+            text-align: left;
+        }
+
+        .txt-right {
+            text-align: right;
+        }
+
+        .invoice-table {
+            line-height: 1.5em;
+            border-collapse: collapse;
+            margin-bottom: 35px;
+        }
+
+        .divide {
+            padding: 1px;
+            background: #000000;
+            margin-bottom: 10px;
+        }
+
+        .invoice-table th {
+            padding: 5px;
+        }
+
+        .invoice-table tr {
+            padding: 5px;
+        }
+
+        .invoice-table td {
+
+            padding: 5px;
+        }
+
+        .invoice-table .invoice-header {
+            background: #252525;
+            color: #ffffff;
+        }
+
+        .summary-table th {
+            border: none;
+            line-height: 1.3em;
+        }
+
+        .summary-title {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .amount-summary {
+            padding: 15px;
+            margin-right: 10px;
+            border: 1px solid #cccccc;
+            height: 150px;
+        }
+
+        .bank-detail {
+            padding: 15px 15px 0px 0px;
+            margin-right: 10px;
+            line-height: 1.3em;
+        }
+
+        .payment-enclosed {
+            width: 90px;
+            padding: 1px 1px 1px 1px;
+            display: inline-block;
+        }
+
+        .payment-link {
+
+            padding: 50px 15px 0px 15px;
+            height: 150px;
+            text-align: center;
+        }
+
+        .payment-button {
+            margin-top: 20px;
+        }
+
+        .button-pay {
+            padding: 13px;
+            text-align: center;
+            width: 110px !important;
+            display: block;
+            margin: 10px auto 5px !important;
+            border-radius: 25px;
+            outline: 0 !important;
+            box-shadow: none !important;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1.4em;
+            background: #39ce13;
+            font-weight: bold;
+        }
+
+        .button-no-payment-required {
+            padding: 13px 20px 13px 20px;
+            text-align: center;
+            width: auto !important;
+            display: block;
+            margin: 10px auto 5px !important;
+            border-radius: 25px;
+            outline: 0 !important;
+            box-shadow: none !important;
+            color: red;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1.4em;
+            background: transparent;
+            font-weight: bold;
+            border: 1px solid red;
+        }
+
+        .term {
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        .invoice-item-title {
+            margin: 0;
+        }
+
+        .expense-group-title {
+            border-top: 0;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .line-height-13 {
+            line-height: 1.3em;
+        }
+
+        .border-top {
+            border-top: 1px solid #000000 !important;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #000000 !important;
+        }
+
+        .no-border td {
+            border: none;
+        }
+
+        .border-none {
+            border: none;
+        }
+
+        .statement {
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .statement-title {
+            font-size: 2.3em;
+        }
+
+        .gray-backgroud {
+            background: #f5f5f5;
+        }
+
+        .row:nth-child(2n-2) {
+            background: #F5F5F5;
+        }
+
+        .invoice-detail-table {
+            margin-bottom: 0;
+        }
+
+        .invoice-detail-table tr td {
+            display: block;
+            float: left;
+            box-sizing: border-box;
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body style="font-size: 0.8em;font-family: 'Roboto', Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+    #parse("pdftemplate/statement/statement-header.html")
+    <!-- statement -->
+
+    #parse("pdftemplate/statement/statement-owner-name.html")
+
+    <div class="right statement txt-right" style="float: right;text-align: right;margin-bottom: 30px;margin-top: 20px;">
+        <p style="line-height: 1.6;">
+            &nbsp;
+        </p>
+        <p style="line-height: 1.6;">
+        <h3 class="bold" style="font-weight: 700;"><b>#if( "$!toDate" != "" )Date: $toDate#end </b></h3>
+        </p>
+        <p style="line-height: 1.6;">
+        <h3 class="bold" style="font-weight: 700;">
+            #if($type == "Custom")
+            <b>No: ${id}</b>
+            #else
+            <b>Statement: ${id}</b>
+            #end
+        </h3>
+        </p>
+
+    </div>
+
+    </div>
+
+    #set($role_trainer = 2)
+    #set($role_syndicator = 10)
+    #set($reAlignAmount = ($isBillingModel && $type == "Monthend"))
+    #set($preview = false)
+    <div><!-- Cover Page-->
+        #if(!$isBillingModel)
+        #parse("pdftemplate/statement/statement-summary-trainer.html")
+        #elseif($isBillingModel)
+        #parse("pdftemplate/statement/statement-summary-syndicator.html")
+        #end
+        <div class="clear" style="clear: both;"></div>
+    </div>
+    #if($dueDate && $showPayment)
+    <h3 class="summary-title" style="margin-top: 0;margin-bottom: 5px;">Invoice due date: $dueDate</h3>
+    #end
+    <div class="summary col-100" style="width: 100%;">
+        <div class="bank-detail left col-35"
+            style="float: left;width: 35%;padding: 15px 15px 0px 0px;margin-right: 10px;line-height: 1.3em;">
+            #if( "$!note" != "" )
+            <table width="100%" border="0" class="summary-table">
+                <tbody>
+                    <tr>
+                        <td>$note</td>
+                    </tr>
+                </tbody>
+            </table>
+            #end
+        </div>
+        #if($paymentEnable == 1 && !$directDebitEnable && $showPayment)
+        #if(!$hidePayNowBtn)
+        <div class="col-20 right" style="float: right;width: 20%;">
+            <a class="button-pay right" target="_blank" href="$paymentLink"
+                style="float: right;padding: 13px;text-align: center;display: block;border-radius: 25px;color: #ffffff;text-decoration: none;text-transform: uppercase;font-size: 1.4em;background: #39ce13;font-weight: bold;width: 110px!important;margin: 10px auto 5px!important;outline: 0!important;box-shadow: none!important;">#if(!$isBillingModel)
+                Pay Here #else Pay All #end</a>
+        </div>
+        #end
+        #elseif(!$showPayment && !$isBillingModel)
+        <div class="col-20 button-no-payment-required right"
+            style="float: right;width: 20%;padding: 13px 20px 13px 20px;text-align: center;width: auto!important;display: block;margin: 10px auto 5px !important;border-radius: 25px;outline: 0 !important;box-shadow: none !important;color: red;text-decoration: none;text-transform: uppercase;font-size: 1.4em;background: transparent;font-weight: bold;border: 1px solid red;">
+            NO PAYMENT REQUIRED
+        </div>
+        #end
+    </div>
+
+    <div class="clear" style="clear: both;"></div>
+
+    <div class="term" style="font-size: 1em;margin-top: 20px;">
+        #if($directDebitEnable)
+        #if($paymentNote)
+        <div class="right statement txt-right"
+            style="float: right;text-align: right;margin-bottom: 30px;margin-top: 20px;">
+            <p class="bold" style="font-weight: 700; line-height: 1.6"><b>$paymentNote</b></p>
+        </div>
+        #end
+
+        #if($overdueBox)
+        <div style="width: 75%">
+            <table width="100%" cellspacing="0" border="1"
+                style="text-align: center;line-height: 1.5em;border-collapse: collapse;border-color: #d8d8d8;">
+                <tr>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">Current</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">Overdue</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">Total</td>
+                </tr>
+                <tr>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">
+                        #if(${reversal})"${currency}0${decimalChar}00"0#else ${totalAmount} #end</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;color: red">${overdue}</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">${totalDue}</td>
+                </tr>
+            </table>
+        </div>
+        #end
+
+        #if($isShowPaymentNote)
+        <h3 class="bold" style="font-weight: 700; clear: both">PAYMENT NOTE</h3>
+        #if( "$!info.contact.paymentNote" != "" )
+        $info.contact.paymentNote
+        #else
+        <p style="line-height: 1.6;">- Itemised costs detailed in following pages</p>
+        <p style="line-height: 1.6;">- Payment Terms are 15 days. Please quote your Statement ID when paying</p>
+        #end
+        #end
+        #else
+        #if($overdueBox)
+        <div style="width: 75%">
+            <table width="100%" cellspacing="0" border="1"
+                style="text-align: center;line-height: 1.5em;border-collapse: collapse;border-color: #d8d8d8;">
+                <tr>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">Current</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">Overdue</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">Total</td>
+                </tr>
+                <tr>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">
+                        #if(${reversal})"${currency}0${decimalChar}00"0#else ${totalAmount} #end</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;color: red">${overdue}</td>
+                    <td class="bold" style="text-align: center;font-weight: 700;padding: 5px;">${totalDue}</td>
+                </tr>
+            </table>
+        </div>
+        #end
+        <h3 class="bold" style="font-weight: 700;">PAYMENT NOTE</h3>
+        #if( "$!info.contact.paymentNote" != "" )
+        $info.contact.paymentNote
+        #else
+        <p style="line-height: 1.6;">- Itemised costs detailed in following pages</p>
+        <p style="line-height: 1.6;">- Payment Terms are 15 days. Please quote your Statement ID when paying</p>
+        #end
+        #end
+    </div>
+
+    #if(($invoices && $invoices.size() > 0) || ($adjustmentNotes && $adjustmentNotes.size() > 0))
+    <div style="page-break-before: always;"></div>
+    #parse("pdftemplate/statement/statement-header.html")
+    #end
+
+    #set($invoiceCount = 0)
+    #set($totalDetailIndex = 0)
+    #foreach($invoice in $invoices)
+    #set($invoiceCount = $invoiceCount + 1)
+    #set($totalDetailIndex = $totalDetailIndex + 3)
+    #if(!$isBillingModel || (!$invoice.isInterest && !$invoice.isManagementFee))
+    #if($velocityCount != 1 )
+    #set($line = 0)
+    #if(!$invoiceNotPageBreak)
+    <div class="clear" style="clear: both;"></div>
+    <div style="page-break-before: always;"></div>
+    #parse("pdftemplate/statement/statement-header.html")
+    #else
+    <div style="padding-bottom: 40px;clear: both;"></div>
+    #end
+    #else
+    #set($line = 1)
+    <h2 style="margin: 0">Invoice Details</h2>
+    #end
+
+    #parse("pdftemplate/statement/statement-page-break.html")
+    #if($showDebtorDetail)
+    #parse("pdftemplate/statement/invoice-owner-name.html")
+    <p style="text-align: right; font-weight: bold; margin: 20px 5px 5px 5px;">Date: #if($invoice.date)$invoice.date#end
+    </p>
+    #set($line = $line + 4)
+    #end
+    #if(!$isBillingModel)
+    #if($isIncludeGstItem)
+    <p style="text-align: right; font-weight: bold; margin: 5px">No: $invoice.xeroInvoiceNumber</p>
+    #end
+    #else
+    <p style="text-align: right; font-weight: bold; margin: 5px">No: $invoice.xeroInvoiceNumber</p>
+    #end
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="invoice-header invoice-detail-header"
+            style="padding: 5px;#if($textHeaderColor)color: $textHeaderColor;#else color: #ffffff;#end#if($headerColor)background: $headerColor;#else background: #252525;#end">
+            #if(!$isBillingModel)
+
+            <th style="font-weight: bold;padding: 5px;width: 60%; vertical-align: text-top">
+                <h3 class="invoice-item-title" style="margin: 0;">
+                    $invoice.description
+                </h3>
+            </th>
+            <th class="txt-right bold"
+                style="font-weight: 700;text-align: right;padding: 5px;width: 15%; vertical-align: text-top;">
+                #if($isIncludeGstItem) Total #end
+            </th>
+            <th class="txt-right bold"
+                style="font-weight: 700;text-align: right;padding: 5px;width: 10%; vertical-align: text-top;">
+                #if($isIncludeGstItem) #if($taxLabel)$taxLabel #else Tax/GST #end #end
+            </th>
+            <th class="txt-right bold"
+                style="font-weight: 700;text-align: right;padding: 5px;width: 15%; vertical-align: text-top">
+                #if($isIncludeGstItem) <a>Total inc #if($taxLabel)$taxLabel #else GST #if($currencyCode)
+                    <a>($currencyCode)</a> #end #end</a> #end
+            </th>
+            #else
+
+            <th style="font-weight: bold;padding: 5px;width: 49%; vertical-align: text-top">
+                <h3 class="invoice-item-title" style="margin: 0;">
+                    $invoice.description
+                </h3>
+            </th>
+            <th class="txt-right bold"
+                style="font-weight: 700;text-align: right;padding: 5px;width: 15%; vertical-align: text-top;">
+                #if($isIncludeGstItem) Total #end
+            </th>
+            <th class="txt-right bold"
+                style="font-weight: 700;text-align: right;padding: 5px;width: 9%; vertical-align: text-top;">
+                #if($isIncludeGstItem) #if($taxLabel)$taxLabel #else Tax/GST #end #end
+            </th>
+            <th class="txt-right bold"
+                style="font-weight: 700;text-align: right;padding: 5px;width: 14%; vertical-align: text-top;">
+                #if($isIncludeGstItem) <a>Total inc #if($taxLabel)$taxLabel #else GST #end</a>
+                #if($currencyCode) <a>($currencyCode)</a> #end #end
+            </th>
+            <th class="txt-right bold" style="font-weight: 700;text-align: right;padding: 5px;width: 10%">
+            </th>
+            #end
+        </tr>
+    </table>
+    #if($isBillingModel && $invoice.openingBalance && $type != 'Custom')
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="" style="padding: 5px;">
+            <td class="bold" style="font-weight: 700;padding: 5px; width:50%;border: none;">
+                Opening Balance
+            </td>
+            <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">
+            </td>
+            <td class="txt-right col-15" style="width: 20%;text-align: right;padding: 5px;">
+            </td>
+            <td class="txt-right col-15" style="font-weight: 700;width: 20%;text-align: right;padding: 5px;">
+                $invoice.openingBalance
+            </td>
+        </tr>
+    </table>
+    #set($paymentIndex = 0)
+    #foreach($transaction in $invoice.paymentTransactions)
+    #set($paymentIndex = $paymentIndex + 1)
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <!--Payment Received-->
+        <tr class="" style="padding: 5px;">
+            <td class="bold" style="font-weight: 700;padding: 5px; width:39%;border: none;">
+                #if($paymentIndex == 1)Payment Received #end
+            </td>
+            <td class="txt-right col-15" style="width: 17%;text-align: right;padding: 5px;">
+                $transaction.getFormattedTransactionDate($tzId)
+            </td>
+            <td class="txt-right col-15" style="width: 21%;text-align: right;padding: 5px;">
+            </td>
+            <td class="txt-right col-15" style="font-weight: 700;width: 23%;text-align: right;padding: 5px;">
+                -$transaction.getFormattedAmountOriginal($currency, $thousandChar, $decimalChar)
+            </td>
+        </tr>
+    </table>
+    #end
+
+    #set($cashRefundIndex = 0)
+    #foreach($cashRefund in $invoice.cashRefunds)
+    #set($cashRefundIndex = $cashRefundIndex + 1)
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <!--Cash Refund Received-->
+        <tr class="" style="padding: 5px;">
+            <td class="bold" style="font-weight: 700;padding: 5px; width:39%;border: none;">
+                #if($cashRefundIndex == 1)Cash Refund #end
+            </td>
+            <td class="txt-right col-15" style="width: 17%;text-align: right;padding: 5px;">
+                $cashRefund.getFormattedTransactionDate($tzId)
+            </td>
+            <td class="txt-right col-15" style="width: 21%;text-align: right;padding: 5px;">
+            </td>
+            <td class="txt-right col-15" style="font-weight: 700;width: 23%;text-align: right;padding: 5px;">
+                $cashRefund.getFormattedAmountOriginal($currency, $thousandChar, $decimalChar)
+            </td>
+        </tr>
+    </table>
+    #end
+    #end
+    #set($detailIndex = 0)
+    #set($categoryLabel = "")
+    #foreach($detail in $invoice.autoDetails)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+
+        #if($invoiceOrder && $invoiceOrder == 'category')
+        #if($categoryLabel != $detail.item)
+        #set($categoryLabel = $detail.item)
+        <tr style="padding: 5px;">
+            <td colspan="3"
+                style="#if($detailIndex > 1) padding-top: 0;#end padding-bottom: 0;font-weight: 700;border: none">
+                $categoryLabel</td>
+        </tr>
+        #end
+        #end
+
+        #if(!$isBillingModel)
+        <tr class="" style="padding: 5px;">
+            <td class="bold"
+                style="#if($detail.children) padding: 5px 5px 5px 15px; #else padding: 5px; #end width: 42%;">
+                $detail.description
+            </td>
+            <td class="txt-right col-15 " style="width: 18%;text-align: right;padding: 5px;">
+                #if($detail.fromDate)$detail.fromDate#end #if($detail.toDate) - $detail.toDate#end
+            </td>
+            <td class="txt-right" style="width: 15%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $detail.amountExcludeGst #end
+            </td>
+
+            <td class="txt-right" style="width: 10%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $detail.gst
+                #end
+            </td>
+            <td class="txt-right bold" style="width: 15%;text-align: right;padding: 5px;">
+                #if(!$reAlignAmount)$detail.amount#end
+            </td>
+        </tr>
+        #else
+        <tr class="" style="padding: 5px;">
+            <td class="bold"
+                style="#if($detail.children) padding: 5px 5px 5px 15px; #else padding: 5px; #end width: 39%;">
+                $detail.description
+            </td>
+            <td class="txt-right col-15 " style="width: 17%;text-align: right;padding: 5px;">
+                #if($detail.fromDate)$detail.fromDate#end#if($detail.toDate) - $detail.toDate#end
+            </td>
+            <td class="txt-right" style="width: 11%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $detail.amountExcludeGst #end
+            </td>
+
+            <td class="txt-right" style="width: 9%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $detail.gst #end
+            </td>
+            <td class="txt-right bold" style="width: 14%;text-align: right;padding: 5px;">
+                $detail.amount
+            </td>
+            <td class="txt-right bold" style="text-align: right;padding: 5px;">
+
+            </td>
+        </tr>
+        <!--    #if($detail.toDate)-->
+        <!--    <tr class="" style="padding: 5px;">-->
+        <!--        <td class="bold" style="#if($detail.children) padding: 5px 5px 5px 15px; #else padding: 5px; #end width: 42%;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15 " style="width: 10%;text-align: right;padding: 5px;">-->
+        <!--            $detail.toDate-->
+        <!--        </td>-->
+        <!--        <td class="txt-right" style="width: 12%;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+
+        <!--        <td class="txt-right" style="width: 10%;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right bold" style="width: 15%;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right bold" style="text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--    </tr>-->
+        <!--    #end-->
+        #end
+    </table>
+
+    #end
+
+    #if(!$isBillingModel || $invoice.autoDetails.size() > 0 || $invoice.managementFeeDetails.size() > 0 ||
+    $invoice.manualDetails.size() > 0)
+    <!--TOTAL AMOUNTS-->
+    #if((!$invoice.isInterest && $invoice.autoDetails.size() > 0))
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="" style="padding: 5px; border-bottom: 1px solid #000000 !important;">
+            <td style="padding: 5px;border: none;width: #if($isBillingModel) 75% #else 89% #end">
+                &nbsp;
+            </td>
+            #if($isBillingModel)
+            <td class="txt-right"
+                style="text-align: right;padding:5px 5px 5px 0;border: none;width:15%;border-top: 1px solid #000000 !important;">
+                $invoice.totalAmount
+            </td>
+            <td class="txt-right"
+                style="text-align: right;font-weight: 700;padding:5px 5px 5px 0;border: none;width:10%;">
+            </td>
+            #else
+            <td class="txt-right bold"
+                style="text-align: right;font-weight: 700;padding:5px 5px 5px 0;border: none;width:11%;border-top: 1px solid #000000 !important;">
+                $invoice.totalAmount
+            </td>
+            #end
+        </tr>
+    </table>
+    #end
+
+    <!--END TOTAL AMOUNTS-->
+    <!--YOUR SHARE-->
+    #if((!$invoice.isInterest && $invoice.autoDetails.size() > 0))
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td class="bold" style="font-weight: 700;padding: 5px;border: none;width: 70%">
+                Your Share
+            </td>
+            #if(!$isBillingModel)
+            <td style="text-align: right;padding: 5px;border: none;width: 15%">
+                #if(${invoice.percent})
+                ${invoice.percent}%
+                #end
+            </td>
+            <td class="txt-right bold" style="font-weight: 700;text-align: right;padding: 5px;border: none;width: 15%">
+                $invoice.invoiceAmount
+            </td>
+            #else
+            <td style="text-align: right;padding: 5px;border: none;width: 20%">
+                #if(${invoice.percent})
+                ${invoice.percent}%
+                #end
+            </td>
+            <td class="txt-right bold" style="font-weight: 700;text-align: right;padding: 5px;border: none;width: 10%">
+                $invoice.invoiceAmount
+            </td>
+            #end
+        </tr>
+    </table>
+    #end
+    <!--END YOUR SHARE-->
+    #if($invoice.manualDetails)
+    #foreach($manualDetail in $invoice.manualDetails)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        #if(!$isBillingModel)
+        <tr class="" style="padding: 5px;">
+            <td class="bold"
+                style="#if($manualDetail.children) padding: 5px 5px 5px 15px; #else padding: 5px; #end width: 42%">
+                $manualDetail.description
+            </td>
+            <td class="txt-right col-15 " style="width: 18%;text-align: right;padding: 5px;">
+                #if($manualDetail.fromDate)$manualDetail.fromDate#end #if(!$reAlignAmount) #if($manualDetail.toDate) -
+                $manualDetail.toDate#end #end
+            </td>
+            <td class="txt-right col-15" style="width: 15%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $manualDetail.amountExcludeGst #end
+            </td>
+
+            <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $manualDetail.gst #end
+            </td>
+
+            <td class="txt-right col-15 bold" style="width: 15%;font-weight: 700;text-align: right;padding: 5px;">
+                $manualDetail.cost
+            </td>
+        </tr>
+        #else
+        <tr class="" style="padding: 5px;">
+            <td class="bold"
+                style="#if($manualDetail.children) padding: 5px 5px 5px 15px; #else padding: 5px; #end width: 39%">
+                $manualDetail.description
+            </td>
+            <td class="txt-right col-15 " style="width: 17%;text-align: right;padding: 5px;">
+                #if($manualDetail.fromDate)$manualDetail.fromDate#end#if(!$reAlignAmount)#if($manualDetail.toDate) -
+                $manualDetail.toDate#end#end
+            </td>
+            <td class="txt-right col-15" style="width: 11%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $manualDetail.amountExcludeGst #end
+            </td>
+
+            <td class="txt-right col-15" style="width: 9%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $manualDetail.gst #end
+            </td>
+
+            <td class="txt-right col-15 bold" style="width: 24%;font-weight: 700;text-align: right;padding: 5px;">
+                $manualDetail.cost
+            </td>
+        </tr>
+        <!--    #if(!$reAlignAmount) #if($manualDetail.toDate)-->
+        <!--    <tr class="" style="padding: 5px;">-->
+        <!--        <td class="bold"-->
+        <!--            style="#if($manualDetail.children) padding: 5px 5px 5px 15px; #else padding: 5px; #end width: 42%">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15 " style="width: 10%;text-align: right;padding: 5px;">-->
+        <!--            $manualDetail.toDate-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15" style="width: 12%;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15 bold" style="width: 26%;font-weight: 700;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--    </tr>-->
+        <!--    #end#end-->
+        #end
+    </table>
+    #end
+    #end
+
+    #if($invoice.managementFeeDetails)
+    #foreach($mngDetail in $invoice.managementFeeDetails)
+
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        #if(!$isBillingModel)
+        <tr class="" style="padding: 5px;">
+            <td class="bold" style="padding: #if($mngDetail.children) 5px 5px 5px 15px; #else 5px; #end width: 42%;">
+                $mngDetail.description
+            </td>
+            <td class="txt-right col-15" style="width: 18%;text-align: right;padding: 5px;">
+                #if($mngDetail.fromDate)$mngDetail.fromDate#end #if($mngDetail.toDate) - $mngDetail.toDate#end
+            </td>
+            <td class="txt-right col-15" style="width: 15%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $mngDetail.amountExcludeGst #end
+            </td>
+
+            <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $mngDetail.gst #end
+            </td>
+
+            <td class="txt-right col-15 bold" style="width: 15%;font-weight: 700;text-align: right;padding: 5px;">
+                $mngDetail.amount
+            </td>
+        </tr>
+        #else
+        <tr class="" style="padding: 5px;">
+            <td class="bold" style="padding: #if($mngDetail.children) 5px 5px 5px 15px; #else 5px; #end width: 39%;">
+                $mngDetail.description
+            </td>
+            <td class="txt-right col-15" style="width: 17%;text-align: right;padding: 5px;">
+                #if($mngDetail.fromDate)$mngDetail.fromDate#end
+            </td>
+            <td class="txt-right col-15" style="width: 11%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $mngDetail.amountExcludeGst #end
+            </td>
+
+            <td class="txt-right col-15" style="width: 9%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $mngDetail.gst #end
+            </td>
+
+            <td class="txt-right col-15 bold" style="width: 24%;font-weight: 700;text-align: right;padding: 5px;">
+                $mngDetail.amount
+            </td>
+        </tr>
+        <!--    #if($mngDetail.toDate)-->
+        <!--    <tr class="" style="padding: 5px;">-->
+        <!--        <td class="bold"-->
+        <!--            style="padding: #if($mngDetail.children) 5px 5px 5px 15px; #else 5px; #end width: 42%;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">-->
+        <!--            $mngDetail.toDate-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15" style="width: 12%;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--        <td class="txt-right col-15 bold" style="width: 26%;font-weight: 700;text-align: right;padding: 5px;">-->
+        <!--        </td>-->
+        <!--    </tr>-->
+        <!--    #end-->
+        #end
+    </table>
+    #end
+    #end
+
+    #end
+
+    <!-- adjustment (credit note in invoice) -->
+    #if($invoice.adjustments && $invoice.adjustments.size() > 0)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+
+    <!-- adjustment details -->
+    #foreach($adjustment in $invoice.adjustments)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td style="padding: 5px;border: none;width:#if($isBillingModel) 46% #else 42% #end">
+                #if($adjustment.reversalDescription)$adjustment.reversalDescription#else$adjustment.description#end
+            </td>
+            <td class="txt-right col-15" style="text-align: right;padding: 5px;border: none;width:10%">
+                $adjustment.dateFormat
+            </td>
+            #if(!$isBillingModel)
+            <td class="txt-right col-15" style="width: 15%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $adjustment.amountExcludeGst #end
+            </td>
+            <!--amount exclude GST-->
+            <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $adjustment.adjustmentGst #end
+            </td>
+            <td class="txt-right bold" style="text-align: right;font-weight: 700;padding: 5px;border: none;width:15%">
+                #if($adjustment.reversalAmount) $adjustment.reversalAmount #else ${adjustment.finalAmount} #end
+            </td>
+            #else
+            <td class="txt-right col-15" style="width: 11%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $adjustment.amountExcludeGst #end
+            </td>
+            <!--amount exclude GST-->
+            <td class="txt-right" style="width: 9%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $adjustment.adjustmentGst #end
+            </td>
+            <td class="txt-right bold" style="text-align: right;font-weight: 700;padding: 5px;border: none;width:24%">
+                #if($adjustment.reversalAmount) $adjustment.reversalAmount #else ${adjustment.finalAmount} #end
+            </td>
+            <!--            <td class="txt-right bold" style="text-align: right;font-weight: 700;padding: 5px;border: none;">-->
+            <!--            </td>-->
+            #end
+        </tr>
+    </table>
+    #end
+    #end
+
+    <!-- Less Discount For Trainer -->
+    #if(!$isBillingModel)
+    #if($invoice.discountAmountValue && !$invoice.isInterest && $invoice.discountAmountValue != '0.00')
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border bold" style="font-weight: 700;padding: 5px;">
+            <td colspan="3" class="" style="padding: 5px;border: none;width: 85%">
+                Less Discount
+            </td>
+            <td class="txt-right bold" style="text-align: right;padding: 5px;border: none;width: 15%">
+                -$invoice.discountAmount
+            </td>
+
+        </tr>
+    </table>
+
+    <!-- discount details -->
+    #foreach($discount in $invoice.dayRateDiscountDetails)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td style="padding: 5px 5px 5px 28px;border: none;width:55%">
+                <i>$discount.discountMessage</i>
+            </td>
+            <td class="" style="padding: 5px;border: none;width:15%">
+                &nbsp;
+            </td>
+            <td class="" style="text-align: right;padding: 5px;border: none;width:15%">
+                <i>$discount.discountPercent%</i>
+            </td>
+            <td class="txt-right" style="text-align: right;padding: 5px;border: none;width:15%">
+                <i>-$discount.discountAmount</i>
+            </td>
+
+        </tr>
+    </table>
+    #end
+
+    #if($invoice.overallDiscount)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td style="padding: 5px 5px 5px 28px;border: none;width:55%">
+                <i>Overall Discount</i>
+            </td>
+            <td class="" style="padding: 5px;border: none;width:15%">
+                &nbsp;
+            </td>
+            <td class="" style="text-align: right;padding: 5px;border: none;width:15%">
+                <i>$invoice.overallDiscountPercent%</i>
+            </td>
+            <td class="txt-right" style="text-align: right;padding: 5px;border: none;width:15%">
+                <i>-$invoice.overallDiscount</i>
+            </td>
+
+        </tr>
+    </table>
+    #end
+    #end
+
+    #else
+    <!-- Less Discount For Syndicator -->
+    #if($invoice.discountAmountValue && !$invoice.isInterest && $invoice.discountAmountValue != '0.00')
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td class="" style="font-weight: 700;padding: 5px;border: none;width: 55%">
+                Less Discount
+            </td>
+            <td class="" style="padding: 5px;border: none;width:15%">
+            </td>
+            <td class="" style="text-align: right;padding: 5px;border: none;width:19%">
+
+            </td>
+            <td class="txt-right bold" style="font-weight: 700;text-align: right;padding: 5px;border: none;width: 11%">
+                -$invoice.discountAmount
+            </td>
+
+        </tr>
+    </table>
+    #foreach($discount in $invoice.dayRateDiscountDetails)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-preview-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td style="padding: 5px 5px 5px 28px;border: none;width:58%">
+                <i>$discount.discountMessage</i>
+            </td>
+            <td class="" style="padding: 5px;border: none;width:15%">
+                &nbsp;
+            </td>
+            <td class="" style="text-align: right;padding: 5px;border: none;width:17%">
+                <i>$discount.discountPercent%</i>
+            </td>
+            <td class="txt-right" style="text-align: right;padding: 5px;border: none;width:10%">
+                <i>-$discount.discountAmount</i>
+            </td>
+
+        </tr>
+    </table>
+    #end
+
+    #if($invoice.overallDiscount)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-preview-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td style="padding: 5px 5px 5px 28px;border: none;width:58%">
+                <i>Overall Discount</i>
+            </td>
+            <td class="" style="padding: 5px;border: none;width:15%">
+                &nbsp;
+            </td>
+            <td class="" style="text-align: right;padding: 5px;border: none;width:17%">
+                <i>$invoice.overallDiscountPercent%</i>
+            </td>
+            <td class="txt-right" style="text-align: right;padding: 5px;border: none;width:10%">
+                <i>-$invoice.overallDiscount</i>
+            </td>
+
+        </tr>
+    </table>
+    #end
+    #end
+    #end
+    <!-- End Discount -->
+
+    <!-- Interest -->
+    #if($isBillingModel)
+    #if($invoice.interest)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border bold" style="font-weight: 700;padding: 5px;">
+            <td colspan="3" class="" style="padding: 5px;border: none;width: 85%">
+                Interest
+            </td>
+            <td class="txt-right bold" style="text-align: right;padding: 5px;border: none;width: 15%">
+                $invoice.interest.amount
+            </td>
+
+        </tr>
+    </table>
+    #end
+
+    <!-- Management Fee -->
+    #if($invoice.managementFee)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border bold" style="font-weight: 700;padding: 5px;">
+            <td colspan="3" class="" style="padding: 5px;border: none;width: 85%">
+                Management Fee
+            </td>
+            <td class="txt-right bold" style="text-align: right;padding: 5px;border: none;width: 15%">
+                $invoice.managementFee.amount
+            </td>
+
+        </tr>
+    </table>
+    #end
+    #end
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="bold no-border" style="background:#f5f5f5;font-weight: 700;padding: 5px;">
+            <td colspan="3" class="bold" style="font-weight: 700;padding: 5px;border: none;width: 85%">
+                Total Amount #if($invoice.gstValue && $invoice.gstValue != '0.00') (Including #if($taxLabel)$taxLabel
+                #else GST #end of $invoice.gst) #end
+            </td>
+            <td class="txt-right" style="text-align: right;padding: 5px;border: none;width: 15%">
+                #if ($isBillingModel) $invoice.ownerAmount #else $invoice.finalAmount #end
+            </td>
+        </tr>
+    </table>
+
+    #if("$!invoice.note" != "")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+
+            <td style="padding: 8px 0px 8px 8px;border: none;width:100%">
+                <b>Note:</b> $invoice.note
+            </td>
+
+        </tr>
+    </table>
+    #end
+
+    #if($invoice.paymentNote)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border" style="padding: 5px;">
+            <td style="padding: 28px 0px 8px 8px;border: none;width:100%">
+                <h3 class="bold" style="font-weight: 700;">
+                    PAYMENT NOTE
+                </h3>
+                <span style="display: block; font-weight: normal; margin: 0px;">$invoice.paymentNote</span>
+            </td>
+        </tr>
+    </table>
+    #end
+
+    #if($paymentEnable == 1 && $isBillingModel && $invoice.showInvoicePayment)
+    #set($detailIndex = $detailIndex + 1)
+    #parse("pdftemplate/statement/statement-page-break.html")
+    #if(!$directDebitEnable)
+    #if(!$hidePayNowBtn)
+    <div class="col-20 right" style="float: right;width: 20%;">
+        <a class="button-pay right" target="_blank" href="$invoice.paymentLink"
+            style="float: right;padding: 13px;text-align: center;display: block;border-radius: 25px;color: #ffffff;text-decoration: none;text-transform: uppercase;font-size: 1.4em;background: #39ce13;font-weight: bold;width: 110px!important;margin: 10px auto 5px!important;outline: 0!important;box-shadow: none!important;">
+            Pay Here</a>
+    </div>
+    #end
+    #end
+    #end
+
+    #end
+
+    #set($totalDetailIndex = $totalDetailIndex + $detailIndex)
+    #if($invoiceNotPageBreak)
+    #if($totalDetailIndex > 25 && $invoices.size() > $invoiceCount)
+    #set($totalDetailIndex = 0)
+    <div class="clear" style="clear: both;"></div>
+    <div style="page-break-before: always;"></div>
+    #parse("pdftemplate/statement/statement-header.html")
+    #end
+    #end
+
+    #end
+
+    #if(!$isBillingModel && $adjustmentNotes.size() > 0)
+
+    #if($invoices.size() > 0)
+    <div class="clear" style="clear: both;"></div>
+    <div style="page-break-before: always;"></div>
+    #parse("pdftemplate/statement/statement-header.html")
+    #end
+
+    <p style="line-height: 1.6;">&nbsp;</p>
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <thead>
+            <tr class="invoice-header invoice-detail-header"
+                style="padding: 5px;#if($textHeaderColor)color: $textHeaderColor;#else color: #ffffff;#end#if($headerColor)background: $headerColor;#else background: #252525;#end">
+                <th style="font-weight: bold;padding: 5px; vertical-align: text-top">
+                    <h3 class="invoice-item-title" style="margin: 0; width: 60%;">
+                        #if($creditLabel && $creditLabel == "Credits/Stakes") $creditLabel #else Adjustments #end
+                    </h3>
+                </th>
+                <!--Add GST and Amount header if isIncludeGstItem = true-->
+                <th class="txt-right bold"
+                    style="font-weight: 700;text-align: right;padding: 5px;width: 15%; vertical-align: text-top">
+                    #if($isIncludeGstItem) Total #end
+                </th>
+                <th class="txt-right bold"
+                    style="font-weight: 700;text-align: right;padding: 5px;width: 10%; vertical-align: text-top">
+                    #if($isIncludeGstItem) Tax/GST #end
+                </th>
+                <th class="txt-right bold"
+                    style="font-weight: 700;text-align: right;padding: 5px;width: 15%; vertical-align: text-top">
+                    <a>#if($isIncludeGstItem) Total inc GST #end</a>
+                    #if($currencyCode) <a>($currencyCode)</a> #end
+                </th>
+            </tr>
+        </thead>
+    </table>
+    #set($revCount = 0)
+    #foreach($invoice in $adjustmentNotes)
+    #set($revCount = $revCount + 1)
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr style="padding: 5px;">
+            <td class="" style="padding: 5px; width: 42%;">
+                #if($invoice.reversalDescription)
+                $invoice.reversalDescription
+                #else
+                $invoice.description
+                #end
+            </td>
+            <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">
+                $invoice.dateFormat
+            </td>
+            <!--amount exclude GST-->
+            <td class="txt-right col-15" style="width: 15%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $invoice.amountExcludeGst #end
+            </td>
+            <!--amount exclude GST-->
+            <td class="txt-right col-15" style="width: 10%;text-align: right;padding: 5px;">
+                #if($isIncludeGstItem) $invoice.adjustmentGst #end
+            </td>
+            <td class="txt-right bold col-15" style="width: 15%;text-align: right;font-weight: 700;padding: 5px;">
+                #if($invoice.reversalAmount) $invoice.reversalAmount #else ${invoice.finalAmount} #end
+            </td>
+        </tr>
+    </table>
+    #end
+
+    #set($revCount = $revCount + 1)
+    <table width="100%" cellspacing="0" border="0" class="invoice-table invoice-detail-table txt-left left"
+        style="float: left;text-align: left;line-height: 1.5em;border-collapse: collapse;">
+        <tr class="no-border bold" style="background:#f5f5f5; font-weight: 700;padding: 5px;">
+            <td style="padding: 8px;border: none; width: 90%;">
+                Total Amount #if($adjustmentGst) (Including #if($taxLabel)$taxLabel #else GST #end of $adjustmentGst)
+                #end
+            </td>
+            <td class="txt-right bold"
+                style="text-align: right;font-weight: 700;padding: 5px;border: none; width: 10%;">
+                ${adjustmentTotal}
+            </td>
+        </tr>
+    </table>
+    #end
+</body>
+
+</html>

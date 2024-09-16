@@ -60,3 +60,10 @@ curl -X PUT localhost:9200/movies   -H "Content-Type: application/json"   -d @mo
 
 ```
 
+
+7. jdeps
+jdeps --ignore-missing-deps -q \
+      --recursive \
+      --multi-release 17 \
+      --print-module-deps \
+      --class-path spring-app/build/libs/* spring-app/build/libs/spring-app-0.0.1-SNAPSHOT.jar
