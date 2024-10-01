@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   redis:
-    image: redis:bookworm
+    image: redis/redis-stack-server:7.4.0-v0
     container_name: redis
     ports:
       - "6379:6379"
@@ -12,6 +12,23 @@ services:
       - network1
     healthcheck:
       test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      timeout: 10s
+      retries: 3
+      interval: 15s
+      start_period: 30s
+
+  redisinsight:
+    image: redis/redisinsight:2.56
+    container_name: redisinsight
+    restart: on-failure
+    # volumes:
+    #   - ./redisinsight:/data
+    ports:
+      - "5540:5540"
+    networks:
+      - network1
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5540/api/health/" ]
       timeout: 10s
       retries: 3
       interval: 15s
