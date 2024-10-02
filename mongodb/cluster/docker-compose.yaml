@@ -1,48 +1,58 @@
-version: '3.8'
+name: 'mongodb-cluster'
 
 services:
   mongo1:
     container_name: mongo1
-    image: mongo
+    image: bitnami/mongodb:7.0.14
     volumes:
-      - ./data/mongo1:/data/db
-      - ./rs-init.sh:/scripts/rs-init.sh
+      - mongo1:/bitnami/mongodb
+      - ./config/mongo1.conf:/opt/bitnami/mongodb/conf/mongodb.conf
+      - ./config/mongodb-keyfile:/opt/bitnami/mongodb/keyfile
     networks:
-      - network1
+      - mongodb_network
     ports:
-      - 27017:27017
-    links:
-      - mongo2
-      - mongo3
+      - "27017:27017"
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+
   mongo2:
     container_name: mongo2
-    image: mongo
+    image: bitnami/mongodb:7.0.14
     volumes:
-      - ./data/mongo2:/data/db
+      - mongo2:/bitnami/mongodb
+      - ./config/mongo2.conf:/opt/bitnami/mongodb/conf/mongodb.conf
+      - ./config/mongodb-keyfile:/opt/bitnami/mongodb/keyfile
     networks:
-      - network1
+      - mongodb_network
     ports:
-      - 27018:27017
+      - "27018:27017"
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    depends_on:
+      - mongo1
+
   mongo3:
     container_name: mongo3
-    image: mongo
+    image: bitnami/mongodb:7.0.14
     volumes:
-      - ./data/mongo3:/data/db
+      - mongo3:/bitnami/mongodb
+      - ./config/mongo3.conf:/opt/bitnami/mongodb/conf/mongodb.conf
+      - ./config/mongodb-keyfile:/opt/bitnami/mongodb/keyfile
     networks:
-      - network1
+      - mongodb_network
     ports:
-      - 27019:27017
+      - "27019:27017"
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
-    networks:
-      - network1
+    depends_on:
+      - mongo1
 
 networks:
-  network1:
-    name: docker_network
-    external: true
+  mongodb_network:
+    driver: bridge
+
+volumes:
+  mongo1:
+    driver: local
+  mongo2:
+    driver: local
+  mongo3:
+    driver: local
 
