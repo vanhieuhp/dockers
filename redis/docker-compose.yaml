@@ -1,4 +1,5 @@
-version: '3.9'
+name: "redis-stack"
+
 services:
   redis:
     image: redis/redis-stack-server:7.4.0-v0
@@ -6,7 +7,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./data:/data
+      - redis:/data
     restart: on-failure
     networks:
       - network1
@@ -18,17 +19,17 @@ services:
       start_period: 30s
 
   redisinsight:
-    image: redis/redisinsight:2.56
-    container_name: redisinsight
+    image: redislabs/redisinsight:2.56
+    container_name: redis-insight
     restart: on-failure
-    # volumes:
-    #   - ./redisinsight:/data
+    volumes:
+      - redisinsight:/data
     ports:
       - "5540:5540"
     networks:
       - network1
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:5540/api/health/" ]
+      test: [ "CMD", "curl" , "-f", "http://localhost:5540/api/health/" ]
       timeout: 10s
       retries: 3
       interval: 15s
@@ -38,3 +39,9 @@ networks:
   network1:
     name: docker_network
     external: true
+
+volumes:
+  redisinsight:
+    driver: local
+  redis:
+    driver: local

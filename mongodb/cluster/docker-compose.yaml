@@ -1,52 +1,50 @@
-name: 'mongodb-cluster'
+name: 'mongodb'
 
 services:
   mongo1:
     container_name: mongo1
     image: bitnami/mongodb:7.0.14
+    hostname: mongo1
     volumes:
       - mongo1:/bitnami/mongodb
-      - ./config/mongo1.conf:/opt/bitnami/mongodb/conf/mongodb.conf
-      - ./config/mongodb-keyfile:/opt/bitnami/mongodb/keyfile
+      - ./config/mongo1-mongod.conf:/opt/bitnami/mongodb/conf/mongodb.conf
+      - ./pki/mongod-keyfile:/opt/bitnami/mongodb/pki/mongod-keyfile
     networks:
-      - mongodb_network
+      - network1
     ports:
-      - "27017:27017"
-    restart: always
-
+      - 27017:27017
+    restart: on-failure
   mongo2:
     container_name: mongo2
     image: bitnami/mongodb:7.0.14
+    hostname: mongo2
     volumes:
       - mongo2:/bitnami/mongodb
-      - ./config/mongo2.conf:/opt/bitnami/mongodb/conf/mongodb.conf
-      - ./config/mongodb-keyfile:/opt/bitnami/mongodb/keyfile
+      - ./config/mongo2-mongod.conf:/opt/bitnami/mongodb/conf/mongodb.conf
+      - ./pki/mongod-keyfile:/opt/bitnami/mongodb/pki/mongod-keyfile
     networks:
-      - mongodb_network
+      - network1
     ports:
-      - "27018:27017"
-    restart: always
-    depends_on:
-      - mongo1
-
+      - 27018:27017
+    restart: on-failure
   mongo3:
     container_name: mongo3
     image: bitnami/mongodb:7.0.14
+    hostname: mongo3
     volumes:
       - mongo3:/bitnami/mongodb
-      - ./config/mongo3.conf:/opt/bitnami/mongodb/conf/mongodb.conf
-      - ./config/mongodb-keyfile:/opt/bitnami/mongodb/keyfile
+      - ./config/mongo3-mongod.conf:/opt/bitnami/mongodb/conf/mongodb.conf
+      - ./pki/mongod-keyfile:/opt/bitnami/mongodb/pki/mongod-keyfile
     networks:
-      - mongodb_network
+      - network1
     ports:
-      - "27019:27017"
-    restart: always
-    depends_on:
-      - mongo1
+      - 27019:27017
+    restart: on-failure
 
 networks:
-  mongodb_network:
-    driver: bridge
+  network1:
+    name: docker_network
+    external: true
 
 volumes:
   mongo1:
@@ -55,4 +53,3 @@ volumes:
     driver: local
   mongo3:
     driver: local
-

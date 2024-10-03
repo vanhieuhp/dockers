@@ -8,3 +8,8 @@ services:
       - "8001:8001"
     networks:
       - network1
+
+networks:
+  network1:
+    name: docker_network
+    external: true
