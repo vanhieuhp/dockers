@@ -1,6 +1,0 @@
-redis:
-  config:
-    properties:
-      singleServerConfig:
-        clientName: dev-redis-client
-        address: "redis://redis:6379"
