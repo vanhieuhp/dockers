@@ -1,14 +1,13 @@
-version: '3.9'
+name: 'postgres'
 
 services:
   postgres:
     image: postgres:14-alpine
     container_name: postgres
     ports:
-      - 15432:5432
+      - 5432:5432
     volumes:
-      - ./data:/var/lib/postgresql/data
-    #  - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_db:/var/lib/postgresql/data
     env_file:
       - .env
     restart: unless-stopped
@@ -33,3 +32,8 @@ networks:
   network1:
     name: docker_network
     external: true
+
+volumes:
+  postgres_db:
+    name: postgres_db
+    driver: local
