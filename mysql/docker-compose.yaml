@@ -1,4 +1,5 @@
-version: '3.8'
+name: mysql
+
 services:
   database:
     image: mysql:9.0.1
@@ -28,10 +29,10 @@ services:
     mem_reservation: 128M
     cpus: 0.5
     networks:
-      - network1
+      - docker_network
 
 networks:
-  network1:
+  docker_network:
     name: docker_network
-    external: true
+    driver: bridge
 

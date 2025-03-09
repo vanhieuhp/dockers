@@ -8,7 +8,7 @@
 
 CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+FLUSH PRIVILEGES;   
 SCRIPT="
 create database prism_dev;
 "
